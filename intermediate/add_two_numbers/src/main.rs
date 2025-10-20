@@ -25,7 +25,6 @@ The number of nodes in each linked list is in the range [1, 100].
 It is guaranteed that the list represents a number that does not have leading zeros.
 */
 
-use std::{f32::RADIX, vec};
 
 // Definition for singly-linked list.
 #[derive(PartialEq, Eq, Clone, Debug)]
@@ -55,25 +54,25 @@ impl Solution {
     }
 
     fn get_num_from_list(self, l: Option<Box<ListNode>>) -> i32 {
-        let mut num: i32 = 0;
-        let mut i: i32 = 1;
+        let mut num: i64 = 0;
+        let mut i: i64 = 1;
         let mut cur = l.as_deref();
         while let Some(l) = cur {
-            num += l.val * i;
+            num += (l.val as i64) * i;
             i = i * 10;
             cur = l.next.as_deref();
         }
 
-        num
+        num as i32
     }
     fn convert_num_to_list_reversed(self, num: i32) -> Option<Box<ListNode>> {
         let num_v: Vec<char> = num.to_string().chars().collect();
         const RADIX: u32 = 10;
-        println!("NUM {:?}", num_v);
+        //println!("NUM {:?}", num_v);
         let mut current = None;
         for c in &num_v {
             let num = (*c).to_digit(RADIX).unwrap() as i32;
-            println!("Num {:?}", c);
+            //println!("Num {:?}", c);
             current = Some(Box::new(ListNode { 
                 val: num as i32,
                 next: current,
@@ -85,7 +84,7 @@ impl Solution {
 }
 
 fn main() {
-    test(Vec::from([2,4,3]), Vec::from([5,6,4]));
+    //test(Vec::from([2,4,3]), Vec::from([5,6,4]));
     test(Vec::from([9]), Vec::from([1,9,9,9,9,9,9,9,9,9]));
 
 }
