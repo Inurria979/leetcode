@@ -39,7 +39,7 @@ impl Solution {
             flag = true;
         }
     
-        let mut x_i32 = x_str.parse::<i32>().unwrap();
+        let mut x_i32 = x_str.parse::<i32>().unwrap_or(0);
         if flag {
             x_i32 *= -1;    
         }
